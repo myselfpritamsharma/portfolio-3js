@@ -52,19 +52,15 @@ function App() {
           textAlign: 'center',
           padding: '2rem',
           borderTop: '1px solid rgba(255,255,255,.05)',
-          color: '#4a5568',
+          color: 'var(--muted, #d6e1ee)',
           fontFamily: 'JetBrains Mono, monospace',
-          fontSize: '.72rem',
-          letterSpacing: '.08em',
+          fontSize: '.76rem',
+          letterSpacing: '.06em',
         }}>
           <p>
-            Designed & Built by&nbsp;
-            <span style={{ color: '#00d4ff' }}>Pritam Sharma</span>
-            &nbsp;·&nbsp;{new Date().getFullYear()}&nbsp;·&nbsp;
-            <span style={{ color: '#f0c78b' }}>Event Horizon Portfolio</span>
-          </p>
-          <p style={{ marginTop: '.4rem', opacity: .5 }}>
-            Follow mission beacons in orbit to navigate ✦
+            Made with <span style={{ color: '#ff6b6b', fontSize: '1rem' }}>❤️</span> by&nbsp;
+            <span style={{ color: 'var(--cyan, #a8d7ff)', fontWeight: 700 }}>Pritam Sharma</span>
+            &nbsp;&middot;&nbsp;{new Date().getFullYear()}
           </p>
         </footer>
       </div>
