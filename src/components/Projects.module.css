@@ -1,0 +1,138 @@
+.featured {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.projCard {
+  padding: 1.5rem;
+  cursor: default;
+  transition: transform .25s ease, box-shadow .3s, border-color .3s !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.topLine {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+}
+
+.projHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.projIcon {
+  width: 44px; height: 44px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.projLinks { display: flex; gap: .5rem; }
+
+.iconBtn {
+  width: 32px; height: 32px;
+  border-radius: 6px;
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.08);
+  display: flex; align-items: center; justify-content: center;
+  font-size: .8rem;
+  color: #8892b0;
+  text-decoration: none;
+  transition: all .2s;
+}
+.iconBtn:hover {
+  color: var(--accent, #00d4ff);
+  border-color: var(--accent, #00d4ff);
+  background: rgba(0,212,255,.07);
+}
+
+.projName {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #e2e8f0;
+  margin-bottom: .25rem;
+}
+
+.projTagline {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .72rem;
+  letter-spacing: .05em;
+  margin-bottom: .9rem;
+}
+
+.projDesc {
+  font-size: .87rem;
+  color: #8892b0;
+  line-height: 1.65;
+  margin-bottom: 1.1rem;
+}
+
+.projTech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+}
+
+/* Others */
+.otherTitle {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #8892b0;
+  margin-bottom: 1rem;
+}
+
+.others {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.otherCard {
+  padding: 1.1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: .9rem;
+  cursor: default;
+}
+
+.otherDot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.otherName {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: .9rem;
+  color: #e2e8f0;
+}
+
+.otherTagline {
+  font-size: .78rem;
+  color: #4a5568;
+  margin-top: .15rem;
+}
+
+.otherLinks {
+  margin-left: auto;
+  display: flex;
+  gap: .5rem;
+  flex-shrink: 0;
+}
+
+.iconLink {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .68rem;
+  color: #4a5568;
+  transition: color .2s;
+  text-decoration: none;
+}
+.iconLink:hover { color: #00d4ff; }
