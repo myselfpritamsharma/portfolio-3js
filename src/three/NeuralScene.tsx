@@ -152,7 +152,8 @@ export function NeuralScene({ onSectionClick }: Props) {
     const HUB_DEFS: HubDef[] = [
       { section: 'about', pos: new THREE.Vector3(-9.2, 4.8, 0), color: 0x8dcfff, label: '◈ MISSION LOG' },
       { section: 'skills', pos: new THREE.Vector3(-4.2, -6.0, 0), color: 0xbfdaee, label: '◈ SYSTEMS' },
-      { section: 'projects', pos: new THREE.Vector3(1.8, 6.2, 0), color: 0xf2bd74, label: '◈ DOCKS' },
+      { section: 'experience', pos: new THREE.Vector3(0.6, -7.2, 0), color: 0xadc8ff, label: '◈ FLIGHT LOG' },
+      { section: 'projects', pos: new THREE.Vector3(2.2, 5.8, 0), color: 0xf2bd74, label: '◈ DOCKS' },
       { section: 'resume', pos: new THREE.Vector3(7.0, -4.9, 0), color: 0xf6d7ab, label: '◈ ARCHIVE' },
       { section: 'contact', pos: new THREE.Vector3(10.8, 3.9, 0), color: 0xcbe6ff, label: '◈ UPLINK' },
       // Hidden knowledge planet: near the accretion ring, no floating label.

@@ -3,13 +3,13 @@ export const profile = {
   name: "Pritam Sharma",
   firstName: "Pritam",
   lastName: "Sharma",
-  title: "Developer II · Full Stack Engineer",
+  title: "AI-Centric Full Stack Engineer · Developer II",
   roles: [
     "Developer II @ Hyland",
-    "Full Stack Engineer",
-    "Angular & React Specialist",
-    ".NET & Node.js Developer",
-    "Azure Cloud Practitioner",
+    "AI-Centric Full Stack Engineer",
+    "Custom AI Agent Builder",
+    "Multi-LLM Orchestration Engineer",
+    "Angular + React + .NET + Node.js",
   ],
   location: "Greater Kolkata Area, India",
   email: "myself.pritam.sharma@gmail.com",
@@ -19,7 +19,7 @@ export const profile = {
   website: "pritamsharma.dev",
 
   summary:
-    "5 years. 3 companies. Angular, React, .NET Core, Node.js, Azure — I speak all of them fluently. I build things that scale, ship things that matter, and occasionally win hackathons doing it. Currently a Developer II at Hyland, engineering the flagship OnBase product. Gold Medalist. Certified. Next: Senior Engineer at a product company that moves fast.",
+    "AI-centric full stack engineer with 5 years across enterprise products. I design custom AI agents and multi-LLM workflows that combine Jira context, product documentation, secure code analysis, and source intelligence to produce minimal, production-ready fixes faster. Core stack: Angular, React, .NET Core, Node.js, Azure, SQL/NoSQL. Currently Developer II at Hyland building OnBase. Gold Medalist x2, hackathon winner, and focused on senior product engineering roles.",
 
   stats: [
     { label: "Years Exp.", value: "5+" },
@@ -40,6 +40,19 @@ export const profile = {
       level: 88,
       color: "#bd34fe",
       items: [".NET Core Web API", "Node.js", "Express.js", "Azure Functions", "REST APIs", "JWT Auth"],
+    },
+    {
+      category: "AI & LLM Engineering",
+      level: 86,
+      color: "#f0c78b",
+      items: [
+        "Custom AI Agents",
+        "Multi-LLM Orchestration",
+        "Prompt Engineering",
+        "RAG-style Context Fusion",
+        "Copilot-assisted Resolution Flows",
+        "Checkmarx API Signal Integration",
+      ],
     },
     {
       category: "Database",

@@ -8,7 +8,7 @@ export function Projects() {
 
   return (
     <section className="section" id="projects">
-      <p className="section-tag">03 — Work</p>
+      <p className="section-tag">04 — Work</p>
       <h2 className="section-title">Featured Projects</h2>
       <div className="section-rule" />
 
