@@ -23,7 +23,7 @@ export const profile = {
 
   stats: [
     { label: "Years Exp.", value: "5+" },
-    { label: "Companies", value: "4" },
+    { label: "Companies", value: "3" },
     { label: "Tech Stacks", value: "10+" },
     { label: "Awards", value: "4" },
   ],
@@ -71,6 +71,8 @@ export const profile = {
       points: [
         "Contributing to Hyland's flagship OnBase product using the latest Angular and .NET frameworks",
         "Winner of Hyland Hackathon 2025 — 'Most Likely to be Adopted' category for an AI-powered solution",
+        "Built AI agents to accelerate issue resolution by connecting Jira tickets, product documentation, and TFS code context—enabling faster and safer vulnerability fixes",
+        "Engineered a security resolution agent that combines Checkmarx API findings (selected severities), codebase analysis, product docs, Jira card context, and Copilot-assisted reasoning to propose minimal working code changes and dependency updates",
         "End-to-end product development: feature implementation, code review, and release management via Bitbucket, Git, and TFS",
         "Kanban-style agile development ensuring smooth collaboration across design, development, and QA teams",
         "Actively participated in regression testing and pre-release validation for stable annual releases",

@@ -23,12 +23,7 @@ export function Navbar({ onResumeClick, onDeveloperClick }: Props) {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const scrollTo = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-    setOpen(false);
-  };
-
-  const scrollFromMissionMenu = (id: string) => {
+  const navigateToSection = (id: string) => {
     window.dispatchEvent(new CustomEvent('rocket-nav-jump', { detail: { targetId: id } }));
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
     setOpen(false);
@@ -47,7 +42,7 @@ export function Navbar({ onResumeClick, onDeveloperClick }: Props) {
         <ul className={styles.links}>
           {NAV_LINKS.map(l => (
             <li key={l.id}>
-              <button className={styles.link} onClick={() => scrollTo(l.id)}>
+              <button className={styles.link} onClick={() => navigateToSection(l.id)}>
                 {l.label}
               </button>
             </li>
@@ -74,7 +69,7 @@ export function Navbar({ onResumeClick, onDeveloperClick }: Props) {
       {open && (
         <div className={styles.drawer}>
           {NAV_LINKS.map(l => (
-            <button key={l.id} className={styles.drawerLink} onClick={() => scrollFromMissionMenu(l.id)}>
+            <button key={l.id} className={styles.drawerLink} onClick={() => navigateToSection(l.id)}>
               {l.label}
             </button>
           ))}

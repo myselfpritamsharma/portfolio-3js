@@ -75,9 +75,10 @@ export function CustomCursor() {
     let docked = false;
     let dockedX = currentX;
     let dockedY = currentY;
-    let scrollDebounce: ReturnType<typeof setTimeout>;
 
     const clamp = (v: number, min: number, max: number) => Math.min(max, Math.max(min, v));
+    const ROCKET_SAFE_PAD = 34;
+    const EFFECT_SAFE_PAD = 24;
 
     const getViewportWidth = () => {
       // Account for scrollbar width (typically 12-17px on desktop)
@@ -204,8 +205,8 @@ export function CustomCursor() {
           document.body.classList.add('rocket-landing-impact');
           setTimeout(() => document.body.classList.remove('rocket-landing-impact'), 280);
 
-          const safeBurstX = clamp(autoEndX, 0, getViewportWidth());
-          const safeBurstY = clamp(autoEndY, 0, window.innerHeight);
+          const safeBurstX = clamp(autoEndX, EFFECT_SAFE_PAD, getViewportWidth() - EFFECT_SAFE_PAD);
+          const safeBurstY = clamp(autoEndY, EFFECT_SAFE_PAD, window.innerHeight - EFFECT_SAFE_PAD);
 
           burst.style.left = `${safeBurstX}px`;
           burst.style.top = `${safeBurstY}px`;
@@ -236,8 +237,8 @@ export function CustomCursor() {
 
       // Enforce viewport bounds safety for extreme scroll/resize scenarios
       const viewportW = getViewportWidth();
-      const clampedX = clamp(currentX, 0, viewportW);
-      const clampedY = clamp(currentY, 0, window.innerHeight);
+      const clampedX = clamp(currentX, ROCKET_SAFE_PAD, viewportW - ROCKET_SAFE_PAD);
+      const clampedY = clamp(currentY, ROCKET_SAFE_PAD, window.innerHeight - ROCKET_SAFE_PAD);
 
       rocket.style.transform = `translate(${clampedX}px, ${clampedY}px) translate(-50%, -50%) rotate(${angle}deg)`;
       trail.style.transform = `translate(${clampedX}px, ${clampedY}px) translate(-50%, -50%) rotate(${angle}deg) translateX(-20px) scaleX(${trailStretch})`;
@@ -267,19 +268,14 @@ export function CustomCursor() {
     };
 
     const onClick = (e: MouseEvent) => {
-      const x = e.clientX;
-      const y = e.clientY;
+      const x = clamp(e.clientX, EFFECT_SAFE_PAD, getViewportWidth() - EFFECT_SAFE_PAD);
+      const y = clamp(e.clientY, EFFECT_SAFE_PAD, window.innerHeight - EFFECT_SAFE_PAD);
       burst.style.left = `${x}px`;
       burst.style.top = `${y}px`;
       burst.classList.remove(styles.warpBurst);
       // Force reflow so repeated clicks replay the animation.
       void burst.offsetWidth;
       burst.classList.add(styles.warpBurst);
-    };
-
-    const onScroll = () => {
-      clearTimeout(scrollDebounce);
-      scrollDebounce = setTimeout(() => {}, 180);
     };
 
     const onResize = () => {
@@ -296,19 +292,16 @@ export function CustomCursor() {
     window.addEventListener('rocket-nav-jump', onRocketJump as EventListener);
     document.addEventListener('mouseover', onOver, true);
     document.addEventListener('mouseout', onOut, true);
-    window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onResize);
 
     raf = requestAnimationFrame(loop);
 
     return () => {
-      clearTimeout(scrollDebounce);
       window.removeEventListener('mousemove', move);
       window.removeEventListener('click', onClick, true);
       window.removeEventListener('rocket-nav-jump', onRocketJump as EventListener);
       document.removeEventListener('mouseover', onOver, true);
       document.removeEventListener('mouseout', onOut, true);
-      window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', onResize);
       cancelAnimationFrame(raf);
     };
