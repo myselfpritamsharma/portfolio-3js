@@ -2,12 +2,11 @@ import { profile } from '../data/profile';
 import styles from './About.module.css';
 
 const LINES = [
-  { key: 'WHO',      val: 'Pritam Sharma — Developer II @ Hyland | Full Stack Engineer' },
-  { key: 'CRAFT',    val: 'Angular · React · .NET Core · Node.js · Azure · SQL/NoSQL' },
-  { key: 'XP',       val: '5+ years across product, enterprise & startup environments' },
-  { key: 'LOCATION', val: 'Greater Kolkata Area, India 🇮🇳  |  Open to Remote' },
-  { key: 'AWARD',    val: '🏆 Hyland Hackathon 2025 Winner · Gold Medalist ×2' },
-  { key: 'STATUS',   val: '⚡ Targeting senior roles in product-based companies' },
+  { key: 'WHO',      val: 'Developer II @ Hyland · 5 yrs · 3 companies · 0 fluff' },
+  { key: 'STACK',    val: 'Angular · React · .NET Core · Node.js · Azure' },
+  { key: 'WINS',     val: 'Hackathon 2025 Winner · Gold Medalist ×2 · Azure Certified' },
+  { key: 'BASE',     val: 'Greater Kolkata Area 🇮🇳  |  Open to Remote & Relocation' },
+  { key: 'GOAL',     val: 'Senior Engineer · Product Company · Ship things that matter' },
 ];
 
 export function About() {

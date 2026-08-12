@@ -19,7 +19,7 @@ export const profile = {
   website: "pritamsharma.dev",
 
   summary:
-    "Developer II at Hyland with 5+ years of full-stack experience crafting high-quality software across Angular, React, .NET Core, and Node.js. I deliver robust, scalable applications that blend precise functionality with polished user experience. Hackathon winner, Azure-certified, and passionate about engineering for innovation — currently targeting senior roles in product-based companies.",
+    "5 years. 3 companies. Angular, React, .NET Core, Node.js, Azure — I speak all of them fluently. I build things that scale, ship things that matter, and occasionally win hackathons doing it. Currently a Developer II at Hyland, engineering the flagship OnBase product. Gold Medalist. Certified. Next: Senior Engineer at a product company that moves fast.",
 
   stats: [
     { label: "Years Exp.", value: "5+" },
@@ -104,16 +104,6 @@ export const profile = {
         "Built cross-platform hybrid apps (Android/iOS) using Angular and Cordova plugins",
         "Migrated Node-RED applications to pure Node.js, eliminating third-party dependencies",
         "Managed a small development team through agile ceremonies end-to-end",
-      ],
-    },
-    {
-      role: "Software Developer (Trainee)",
-      company: "Alumnus Software Limited",
-      period: "January 2020 – June 2020",
-      location: "Salt Lake City Metropolitan Area",
-      type: "Internship",
-      points: [
-        "Trainee role in full-stack software development, gaining hands-on industry experience",
       ],
     },
   ],
