@@ -6,7 +6,7 @@ const LINES = [
   { key: 'STACK',    val: 'Angular · React · .NET Core · Node.js · Azure' },
   { key: 'WINS',     val: 'Hackathon 2025 Winner · Gold Medalist ×2 · Azure Certified' },
   { key: 'BASE',     val: 'Greater Kolkata Area 🇮🇳  |  Open to Remote & Relocation' },
-  { key: 'GOAL',     val: 'Senior Engineer · Product Company · Ship things that matter' },
+  { key: 'FOCUS',    val: 'AI Agents · Multi-LLM Systems · Enterprise Full Stack' },
 ];
 
 export function About() {

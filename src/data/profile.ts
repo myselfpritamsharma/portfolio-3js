@@ -19,7 +19,7 @@ export const profile = {
   website: "pritamsharma.dev",
 
   summary:
-    "AI-centric full stack engineer with 5 years across enterprise products. I design custom AI agents and multi-LLM workflows that combine Jira context, product documentation, secure code analysis, and source intelligence to produce minimal, production-ready fixes faster. Core stack: Angular, React, .NET Core, Node.js, Azure, SQL/NoSQL. Currently Developer II at Hyland building OnBase. Gold Medalist x2, hackathon winner, and focused on senior product engineering roles.",
+    "AI-centric full stack engineer with 5 years across enterprise products. I design custom AI agents and multi-LLM workflows that combine Jira context, product documentation, secure code analysis, and source intelligence to produce minimal, production-ready fixes faster. Core stack: Angular, React, .NET Core, Node.js, Azure, SQL/NoSQL. Currently Developer II at Hyland building OnBase. Gold Medalist x2 and hackathon winner.",
 
   stats: [
     { label: "Years Exp.", value: "5+" },

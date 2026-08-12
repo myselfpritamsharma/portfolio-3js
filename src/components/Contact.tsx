@@ -26,8 +26,8 @@ export function Contact() {
 
       <div className={styles.wrapper}>
         <p className={styles.intro}>
-          Open to senior engineering roles, AI-agent collaborations, and interesting product challenges.
-          Drop me a message — I respond within 24 hours.
+          Have a project, a collaboration idea, or just want to talk tech?
+          Drop a message and I’ll get back to you.
         </p>
 
         <div className={styles.grid}>
