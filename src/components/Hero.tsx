@@ -8,7 +8,7 @@ export function Hero({ onResumeClick }: { onResumeClick: () => void }) {
   const [roleIdx, setRoleIdx] = useState(0);
   const [displayed, setDisplayed] = useState('');
   const [deleting, setDeleting] = useState(false);
-  const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   /* Typewriter effect */
   useEffect(() => {

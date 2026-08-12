@@ -1,9 +1,8 @@
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { profile } from '../data/profile';
 import styles from './Projects.module.css';
 
 export function Projects() {
-  const [active, setActive] = useState<number | null>(null);
   const featured = profile.projects.filter(p => p.featured);
   const others   = profile.projects.filter(p => !p.featured);
 

@@ -273,7 +273,7 @@ export function NeuralScene({ onSectionClick }: Props) {
     let hoveredSection: string | null = null;
     let lastKnownScrollY = window.scrollY;
     let isRapidScroll = false;
-    let rapidScrollTimeout: NodeJS.Timeout;
+    let rapidScrollTimeout: ReturnType<typeof setTimeout>;
 
     const updateMouseWorld = (cx: number, cy: number) => {
       mouse2D.set((cx / W) * 2 - 1, -(cy / H) * 2 + 1);

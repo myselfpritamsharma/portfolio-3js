@@ -75,8 +75,7 @@ export function CustomCursor() {
     let docked = false;
     let dockedX = currentX;
     let dockedY = currentY;
-    let isScrolling = false;
-    let scrollDebounce: NodeJS.Timeout;
+    let scrollDebounce: ReturnType<typeof setTimeout>;
 
     const clamp = (v: number, min: number, max: number) => Math.min(max, Math.max(min, v));
 
@@ -279,9 +278,8 @@ export function CustomCursor() {
     };
 
     const onScroll = () => {
-      isScrolling = true;
       clearTimeout(scrollDebounce);
-      scrollDebounce = setTimeout(() => { isScrolling = false; }, 180);
+      scrollDebounce = setTimeout(() => {}, 180);
     };
 
     const onResize = () => {
