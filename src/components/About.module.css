@@ -34,7 +34,7 @@
 .termTitle {
   font-family: 'JetBrains Mono', monospace;
   font-size: .72rem;
-  color: #4a5568;
+  color: #c7d5e6;
   margin-left: .5rem;
 }
 
@@ -68,7 +68,7 @@
 }
 
 .termVal {
-  color: #8892b0;
+  color: #d5e1ef;
   font-size: .78rem;
   font-family: 'JetBrains Mono', monospace;
 }
@@ -146,7 +146,7 @@
   align-items: flex-start;
   gap: .7rem;
   font-size: .88rem;
-  color: #8892b0;
+  color: #d5e1ef;
   line-height: 1.5;
 }
 
@@ -169,7 +169,7 @@
 
 .cert {
   font-size: .82rem;
-  color: #8892b0;
+  color: #d5e1ef;
   padding: .35rem 0;
   border-bottom: 1px solid rgba(255,255,255,.04);
 }

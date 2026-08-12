@@ -41,7 +41,7 @@
   border: 1px solid rgba(255,255,255,.08);
   display: flex; align-items: center; justify-content: center;
   font-size: .8rem;
-  color: #8892b0;
+  color: #d2deec;
   text-decoration: none;
   transition: all .2s;
 }
@@ -68,7 +68,7 @@
 
 .projDesc {
   font-size: .87rem;
-  color: #8892b0;
+  color: #d5e1ef;
   line-height: 1.65;
   margin-bottom: 1.1rem;
 }
@@ -84,7 +84,7 @@
   font-family: 'Space Grotesk', sans-serif;
   font-size: 1.1rem;
   font-weight: 600;
-  color: #8892b0;
+  color: #d6e1ee;
   margin-bottom: 1rem;
 }
 
@@ -117,7 +117,7 @@
 
 .otherTagline {
   font-size: .78rem;
-  color: #4a5568;
+  color: #c4d1e1;
   margin-top: .15rem;
 }
 
@@ -131,7 +131,7 @@
 .iconLink {
   font-family: 'JetBrains Mono', monospace;
   font-size: .68rem;
-  color: #4a5568;
+  color: #c4d1e1;
   transition: color .2s;
   text-decoration: none;
 }
