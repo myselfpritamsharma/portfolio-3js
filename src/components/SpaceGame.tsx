@@ -413,6 +413,11 @@ export function SpaceGame() {
     return d.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
   };
 
+  const resetLeaderboard = () => {
+    setRuns([]);
+    localStorage.removeItem(RUNS_KEY);
+  };
+
   return (
     <section className="section" id="game">
       <p className="section-tag">04 — Simulator</p>
@@ -495,7 +500,18 @@ export function SpaceGame() {
         </div>
 
         <div className={styles.leaderboard}>
-          <p className={styles.lbTitle}>Top Local Runs</p>
+          <div className={styles.lbHeader}>
+            <p className={styles.lbTitle}>Top Local Runs</p>
+            <button
+              type="button"
+              className={styles.resetBtn}
+              onClick={resetLeaderboard}
+              disabled={runs.length === 0}
+              aria-label="Reset local leaderboard"
+            >
+              Reset
+            </button>
+          </div>
           {runs.length === 0 ? (
             <p className={styles.lbEmpty}>No runs yet. Start a mission to populate leaderboard.</p>
           ) : (

@@ -160,13 +160,44 @@
   padding: 0.8rem;
 }
 
+.lbHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.7rem;
+  margin-bottom: 0.5rem;
+}
+
 .lbTitle {
   font-family: var(--font-mono);
   font-size: 0.72rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: #f7d4a5;
-  margin-bottom: 0.5rem;
+}
+
+.resetBtn {
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.04);
+  color: #e7effa;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  padding: 0.3rem 0.7rem;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, transform 0.2s;
+}
+
+.resetBtn:hover:not(:disabled) {
+  border-color: rgba(168, 215, 255, 0.6);
+  background: rgba(168, 215, 255, 0.15);
+  transform: translateY(-1px);
+}
+
+.resetBtn:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
 }
 
 .lbEmpty {
