@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sector 404 — Signal Lost · Pritam Sharma</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg:    #02050b;
+      --cyan:  #a8d7ff;
+      --gold:  #e7b372;
+      --white: #f6f9ff;
+      --muted: #d6e1ee;
+      --dim:   #8899aa;
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'JetBrains Mono', 'Courier New', monospace;
+      overflow: hidden;
+    }
+
+    /* ── Stars ── */
+    .stars {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .star {
+      position: absolute;
+      border-radius: 50%;
+      background: #dceaff;
+      animation: twinkle var(--d, 4s) var(--delay, 0s) ease-in-out infinite alternate;
+    }
+
+    @keyframes twinkle {
+      from { opacity: var(--lo, 0.2); transform: scale(1); }
+      to   { opacity: var(--hi, 0.9); transform: scale(1.4); }
+    }
+
+    /* ── Background gradients ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 70% 20%, rgba(168, 215, 255, 0.08), transparent 40%),
+        radial-gradient(circle at 20% 75%, rgba(231, 179, 114, 0.07), transparent 38%),
+        linear-gradient(180deg, rgba(3, 7, 14, 0.7), rgba(1, 3, 6, 0.96));
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* ── Main content ── */
+    .scene {
+      position: relative;
+      z-index: 1;
+      height: 100svh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      gap: 0;
+    }
+
+    .tag {
+      font-size: .72rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 1.2rem;
+      animation: fadeUp .8s .1s both;
+    }
+
+    .code {
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: clamp(5rem, 18vw, 11rem);
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -.02em;
+      background: linear-gradient(135deg, var(--cyan) 0%, var(--gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 0 42px rgba(168, 215, 255, 0.22));
+      animation: fadeUp .8s .15s both;
+      margin-bottom: .5rem;
+    }
+
+    .headline {
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: clamp(1.1rem, 3vw, 1.7rem);
+      font-weight: 500;
+      color: var(--white);
+      letter-spacing: .04em;
+      animation: fadeUp .8s .2s both;
+      margin-bottom: 1rem;
+    }
+
+    .message {
+      font-size: .88rem;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 480px;
+      animation: fadeUp .8s .28s both;
+      margin-bottom: 2.5rem;
+    }
+
+    .message code {
+      color: var(--cyan);
+      background: rgba(168, 215, 255, 0.1);
+      border: 1px solid rgba(168, 215, 255, 0.2);
+      border-radius: 4px;
+      padding: .1em .4em;
+      font-size: .82rem;
+    }
+
+    .actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      animation: fadeUp .8s .35s both;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .75rem 1.75rem;
+      border-radius: 8px;
+      font-family: 'Cinzel', serif;
+      font-weight: 600;
+      font-size: .88rem;
+      letter-spacing: .04em;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform .22s, box-shadow .22s;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--cyan), var(--gold));
+      color: #02050b;
+      border: none;
+      box-shadow: 0 0 22px rgba(168, 215, 255, 0.28);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 44px rgba(168, 215, 255, 0.42);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      border: 1px solid rgba(214, 225, 238, 0.55);
+    }
+
+    .btn-outline:hover {
+      background: rgba(214, 225, 238, 0.1);
+      transform: translateY(-2px);
+    }
+
+    /* ── Scanline ── */
+    .scanlines {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 2;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 3px,
+        rgba(168, 215, 255, 0.012) 3px,
+        rgba(168, 215, 255, 0.012) 5px
+      );
+    }
+
+    /* ── Glitch effect on 404 ── */
+    .code {
+      position: relative;
+    }
+
+    .code::before,
+    .code::after {
+      content: attr(data-text);
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--cyan) 0%, var(--gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .code::before {
+      left: 2px;
+      animation: glitchLeft 5s 2s step-end infinite;
+      clip-path: polygon(0 20%, 100% 20%, 100% 40%, 0 40%);
+    }
+
+    .code::after {
+      left: -2px;
+      animation: glitchRight 5s 3s step-end infinite;
+      clip-path: polygon(0 60%, 100% 60%, 100% 80%, 0 80%);
+    }
+
+    @keyframes glitchLeft {
+      0%,95%,100% { transform: none; opacity: 0; }
+      96% { transform: translateX(-3px); opacity: 0.7; }
+      97% { transform: translateX(3px); opacity: 0; }
+      98% { transform: translateX(-2px); opacity: 0.5; }
+    }
+
+    @keyframes glitchRight {
+      0%,94%,100% { transform: none; opacity: 0; }
+      95% { transform: translateX(3px); opacity: 0.7; }
+      96.5% { transform: translateX(-3px); opacity: 0; }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+
+    @media (max-width: 480px) {
+      .actions { flex-direction: column; align-items: stretch; }
+      .btn { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Stars -->
+  <div class="stars" aria-hidden="true" id="stars"></div>
+  <div class="scanlines" aria-hidden="true"></div>
+
+  <main class="scene">
+    <p class="tag">Transmission Error · Deep Space Grid</p>
+
+    <div class="code" data-text="404" aria-label="Error 404">404</div>
+
+    <h1 class="headline">Sector Not Found</h1>
+
+    <p class="message">
+      The coordinates you entered don't match any known sector.<br />
+      The signal was lost at <code id="lost-path"></code>
+    </p>
+
+    <div class="actions">
+      <a href="/portfolio-3js/" class="btn btn-primary">↩ Return to Base</a>
+      <button type="button" class="btn btn-outline" onclick="history.back()">← Go Back</button>
+    </div>
+  </main>
+
+  <script>
+    // Show the path that 404'd
+    const p = window.location.pathname;
+    document.getElementById('lost-path').textContent = p || '/';
+
+    // Generate random stars
+    const container = document.getElementById('stars');
+    for (let i = 0; i < 160; i++) {
+      const s = document.createElement('span');
+      s.className = 'star';
+      const size = Math.random() < 0.12 ? 2.5 : Math.random() < 0.35 ? 1.8 : 1.1;
+      s.style.cssText = `
+        width:${size}px;
+        height:${size}px;
+        top:${Math.random() * 100}%;
+        left:${Math.random() * 100}%;
+        --d:${3 + Math.random() * 5}s;
+        --delay:${Math.random() * 4}s;
+        --lo:${0.1 + Math.random() * 0.3};
+        --hi:${0.6 + Math.random() * 0.4};
+      `;
+      container.appendChild(s);
+    }
+  </script>
+</body>
+</html>

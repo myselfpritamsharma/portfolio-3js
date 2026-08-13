@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>No Signal — Deep Space Blackout · Pritam Sharma</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg:    #02050b;
+      --cyan:  #a8d7ff;
+      --gold:  #e7b372;
+      --white: #f6f9ff;
+      --muted: #d6e1ee;
+      --dim:   #8899aa;
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'JetBrains Mono', 'Courier New', monospace;
+      overflow: hidden;
+    }
+
+    .stars {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .star {
+      position: absolute;
+      border-radius: 50%;
+      background: #dceaff;
+      animation: twinkle var(--d, 4s) var(--delay, 0s) ease-in-out infinite alternate;
+    }
+
+    @keyframes twinkle {
+      from { opacity: var(--lo, 0.2); }
+      to   { opacity: var(--hi, 0.8); }
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 30% 25%, rgba(168, 215, 255, 0.07), transparent 42%),
+        radial-gradient(circle at 75% 72%, rgba(231, 179, 114, 0.06), transparent 38%),
+        linear-gradient(180deg, rgba(3, 7, 14, 0.7), rgba(1, 3, 6, 0.96));
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .scene {
+      position: relative;
+      z-index: 1;
+      height: 100svh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    /* Signal orb */
+    .orb-wrap {
+      position: relative;
+      width: 90px;
+      height: 90px;
+      margin-bottom: 2.2rem;
+      animation: fadeUp .8s .1s both;
+    }
+
+    .orb {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 38% 36%, rgba(168, 215, 255, 0.3), rgba(2, 5, 11, 0.9));
+      border: 1px solid rgba(168, 215, 255, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .ring {
+      position: absolute;
+      inset: -14px;
+      border-radius: 50%;
+      border: 1px dashed rgba(168, 215, 255, 0.22);
+      animation: spin 12s linear infinite;
+    }
+
+    .ring2 {
+      position: absolute;
+      inset: -26px;
+      border-radius: 50%;
+      border: 1px dashed rgba(231, 179, 114, 0.16);
+      animation: spin 20s linear infinite reverse;
+    }
+
+    /* Static/noise flicker on the icon */
+    .orb-icon {
+      animation: flicker 2.5s 1s step-end infinite;
+    }
+
+    @keyframes flicker {
+      0%,90%,100% { opacity: 1; }
+      92% { opacity: 0.1; }
+      94% { opacity: 0.9; }
+      96% { opacity: 0.2; }
+      98% { opacity: 1; }
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .tag {
+      font-size: .72rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 1rem;
+      animation: fadeUp .8s .2s both;
+    }
+
+    .headline {
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      font-weight: 700;
+      letter-spacing: .02em;
+      background: linear-gradient(135deg, var(--white), var(--muted));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: fadeUp .8s .25s both;
+      margin-bottom: .6rem;
+    }
+
+    .subline {
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: clamp(.95rem, 2.5vw, 1.2rem);
+      color: var(--gold);
+      letter-spacing: .06em;
+      animation: fadeUp .8s .3s both;
+      margin-bottom: 1.2rem;
+    }
+
+    .message {
+      font-size: .84rem;
+      color: var(--muted);
+      line-height: 1.9;
+      max-width: 440px;
+      animation: fadeUp .8s .35s both;
+      margin-bottom: 2.5rem;
+    }
+
+    /* Terminal status block */
+    .terminal {
+      background: rgba(5, 10, 18, 0.75);
+      border: 1px solid rgba(168, 215, 255, 0.15);
+      border-radius: 10px;
+      padding: .8rem 1.2rem;
+      font-size: .72rem;
+      color: var(--dim);
+      text-align: left;
+      max-width: 360px;
+      width: 100%;
+      margin-bottom: 2.5rem;
+      animation: fadeUp .8s .4s both;
+    }
+
+    .terminal .row { display: flex; gap: .6rem; padding: .18rem 0; }
+    .terminal .key { color: #bd34fe; flex-shrink: 0; }
+    .terminal .val { color: var(--muted); }
+    .terminal .err { color: #ff6b6b; }
+    .terminal .ok  { color: #00ff88; }
+
+    .actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      animation: fadeUp .8s .46s both;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .72rem 1.6rem;
+      border-radius: 8px;
+      font-family: 'Cinzel', serif;
+      font-weight: 600;
+      font-size: .86rem;
+      letter-spacing: .04em;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform .22s, box-shadow .22s;
+      border: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--cyan), var(--gold));
+      color: #02050b;
+      box-shadow: 0 0 22px rgba(168, 215, 255, 0.28);
+    }
+
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 44px rgba(168, 215, 255, 0.4); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      border: 1px solid rgba(214, 225, 238, 0.55);
+    }
+
+    .btn-outline:hover { background: rgba(214, 225, 238, 0.1); transform: translateY(-2px); }
+
+    .scanlines {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 2;
+      background: repeating-linear-gradient(
+        0deg, transparent, transparent 3px,
+        rgba(168, 215, 255, 0.012) 3px, rgba(168, 215, 255, 0.012) 5px
+      );
+    }
+
+    /* Connection status indicator */
+    .status-dot {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #ff6b6b;
+      margin-right: .4rem;
+      animation: pulse-red 1.4s ease-in-out infinite;
+      vertical-align: middle;
+    }
+
+    @keyframes pulse-red {
+      0%,100% { opacity: 1; box-shadow: 0 0 6px #ff6b6b; }
+      50%      { opacity: 0.4; box-shadow: none; }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; }
+    }
+
+    @media (max-width: 480px) {
+      .actions { flex-direction: column; align-items: stretch; }
+      .btn { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="stars" aria-hidden="true" id="stars"></div>
+  <div class="scanlines" aria-hidden="true"></div>
+
+  <main class="scene">
+    <div class="orb-wrap" aria-hidden="true">
+      <div class="ring"></div>
+      <div class="ring2"></div>
+      <div class="orb"><span class="orb-icon">📡</span></div>
+    </div>
+
+    <p class="tag"><span class="status-dot" role="img" aria-label="offline"></span>Connection severed</p>
+    <h1 class="headline">Deep Space Blackout</h1>
+    <p class="subline">No Signal Detected</p>
+
+    <p class="message">
+      Your connection to the neural network was lost.<br />
+      Reconnect and try again, or check your signal.
+    </p>
+
+    <div class="terminal" role="status" aria-live="polite" aria-label="Network diagnostic">
+      <div class="row"><span class="key">[NET]</span><span class="val err">Connection unreachable</span></div>
+      <div class="row"><span class="key">[DNS]</span><span class="val err">Query timed out</span></div>
+      <div class="row"><span class="key">[CACHE]</span><span class="val ok" id="cache-status">Checking…</span></div>
+      <div class="row"><span class="key">[RETRY]</span><span class="val" id="retry-status">Waiting for network…</span></div>
+    </div>
+
+    <div class="actions">
+      <button type="button" class="btn btn-primary" onclick="tryReload()">↺ Retry Connection</button>
+      <a href="/portfolio-3js/" class="btn btn-outline">↩ Return to Base</a>
+    </div>
+  </main>
+
+  <script>
+    // Generate stars
+    const container = document.getElementById('stars');
+    for (let i = 0; i < 150; i++) {
+      const s = document.createElement('span');
+      s.className = 'star';
+      const size = Math.random() < 0.1 ? 2.4 : Math.random() < 0.3 ? 1.6 : 1;
+      s.style.cssText = `
+        width:${size}px; height:${size}px;
+        top:${Math.random() * 100}%;
+        left:${Math.random() * 100}%;
+        --d:${3 + Math.random() * 5}s;
+        --delay:${Math.random() * 4}s;
+        --lo:${0.1 + Math.random() * 0.25};
+        --hi:${0.55 + Math.random() * 0.4};
+      `;
+      container.appendChild(s);
+    }
+
+    // Update cache status
+    const cacheEl = document.getElementById('cache-status');
+    const retryEl = document.getElementById('retry-status');
+
+    caches.keys().then(keys => {
+      cacheEl.textContent = keys.length > 0 ? 'App cached — limited access available' : 'No local cache';
+      cacheEl.className = keys.length > 0 ? 'val ok' : 'val err';
+    }).catch(() => {
+      cacheEl.textContent = 'Cache unavailable';
+      cacheEl.className = 'val err';
+    });
+
+    // Auto-retry when network comes back
+    let retryCount = 0;
+
+    function tryReload() {
+      window.location.reload();
+    }
+
+    window.addEventListener('online', () => {
+      retryEl.textContent = 'Signal restored — reloading…';
+      retryEl.className = 'val ok';
+      setTimeout(() => window.location.href = '/portfolio-3js/', 800);
+    });
+
+    window.addEventListener('offline', () => {
+      retryEl.textContent = 'Still offline…';
+    });
+
+    // Periodic retry countdown shown in the terminal
+    let countdown = 30;
+    const tick = setInterval(() => {
+      countdown--;
+      if (countdown <= 0) {
+        retryEl.textContent = 'Auto-retrying…';
+        clearInterval(tick);
+        setTimeout(tryReload, 600);
+      } else {
+        retryEl.textContent = `Auto-retry in ${countdown}s`;
+      }
+    }, 1000);
+  </script>
+</body>
+</html>
