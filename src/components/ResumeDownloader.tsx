@@ -25,6 +25,7 @@ interface Props { onClose: () => void; }
 
 export function ResumeDownloader({ onClose }: Props) {
   const [selected, setSelected] = useState<FormatId | null>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
   const printRef = useRef<HTMLDivElement>(null);
   const closeBtnRef = useRef<HTMLButtonElement>(null);
 
@@ -41,13 +42,41 @@ export function ResumeDownloader({ onClose }: Props) {
       if (e.key === 'Escape') onClose();
     };
 
+    const onTrap = (e: KeyboardEvent) => {
+      if (e.key !== 'Tab') return;
+
+      const root = modalRef.current;
+      if (!root) return;
+
+      const focusable = root.querySelectorAll<HTMLElement>(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      if (focusable.length === 0) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      const active = document.activeElement as HTMLElement | null;
+
+      if (e.shiftKey && active === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && active === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+
     window.addEventListener('keydown', onEsc);
-    return () => window.removeEventListener('keydown', onEsc);
+    window.addEventListener('keydown', onTrap);
+    return () => {
+      window.removeEventListener('keydown', onEsc);
+      window.removeEventListener('keydown', onTrap);
+    };
   }, [onClose]);
 
   return (
     <div className={styles.overlay} role="presentation" onClick={e => { if (e.target === e.currentTarget) onClose(); }}>
-      <div className={styles.modal} role="dialog" aria-modal="true" aria-labelledby="resume-dialog-title">
+      <div className={styles.modal} role="dialog" aria-modal="true" aria-labelledby="resume-dialog-title" id="resume-dialog" ref={modalRef}>
         {/* Header */}
         <div className={styles.header}>
           <div>

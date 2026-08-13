@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import { NeuralScene }        from './three/NeuralScene';
 import { CustomCursor }       from './components/CustomCursor';
 import { Navbar }             from './components/Navbar';
@@ -16,6 +16,8 @@ import './App.css';
 function App() {
   const [showResume, setShowResume] = useState(false);
   const [showDeveloperBriefing, setShowDeveloperBriefing] = useState(false);
+  const briefingDialogRef = useRef<HTMLDivElement>(null);
+  const briefingCloseRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const onEsc = (e: KeyboardEvent) => {
@@ -27,6 +29,38 @@ function App() {
     window.addEventListener('keydown', onEsc);
     return () => window.removeEventListener('keydown', onEsc);
   }, []);
+
+  useEffect(() => {
+    if (!showDeveloperBriefing) return;
+
+    briefingCloseRef.current?.focus();
+
+    const onTrap = (e: KeyboardEvent) => {
+      if (e.key !== 'Tab') return;
+      const root = briefingDialogRef.current;
+      if (!root) return;
+
+      const focusable = root.querySelectorAll<HTMLElement>(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      if (focusable.length === 0) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      const active = document.activeElement as HTMLElement | null;
+
+      if (e.shiftKey && active === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && active === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+
+    window.addEventListener('keydown', onTrap);
+    return () => window.removeEventListener('keydown', onTrap);
+  }, [showDeveloperBriefing]);
 
   const handleSectionClick = useCallback((id: string) => {
     if (id === 'developer') {
@@ -93,12 +127,14 @@ function App() {
             role="dialog"
             aria-modal="true"
             aria-label="Developer briefing"
+            ref={briefingDialogRef}
           >
             <button
               type="button"
               className="developer-briefing-close"
               onClick={() => setShowDeveloperBriefing(false)}
               aria-label="Close developer briefing"
+              ref={briefingCloseRef}
             >
               ✕
             </button>

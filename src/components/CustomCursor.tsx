@@ -12,10 +12,12 @@ export function CustomCursor() {
   useEffect(() => {
     const mediaFinePrimary = window.matchMedia('(hover: hover) and (pointer: fine)');
     const mediaFineAny = window.matchMedia('(any-hover: hover) and (any-pointer: fine)');
-    const update = () => setEnabled(mediaFinePrimary.matches || mediaFineAny.matches);
+    const mediaReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const update = () => setEnabled((mediaFinePrimary.matches || mediaFineAny.matches) && !mediaReduced.matches);
     update();
     mediaFinePrimary.addEventListener('change', update);
     mediaFineAny.addEventListener('change', update);
+    mediaReduced.addEventListener('change', update);
 
     const fallbackMouseEnable = () => {
       setEnabled(true);
@@ -28,6 +30,7 @@ export function CustomCursor() {
     return () => {
       mediaFinePrimary.removeEventListener('change', update);
       mediaFineAny.removeEventListener('change', update);
+      mediaReduced.removeEventListener('change', update);
       window.removeEventListener('mousemove', fallbackMouseEnable);
     };
   }, []);

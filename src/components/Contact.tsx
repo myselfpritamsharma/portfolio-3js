@@ -38,7 +38,14 @@ export function Contact() {
               { icon: '💼', label: 'LinkedIn', val: 'pritam-sharma-483242199',  href: profile.linkedin },
               { icon: '🐙', label: 'GitHub',   val: 'myselfpritamsharma',  href: profile.github },
             ].map(c => (
-              <a key={c.label} href={c.href} target="_blank" rel="noreferrer" className={styles.channel}>
+              <a
+                key={c.label}
+                href={c.href}
+                target="_blank"
+                rel="noreferrer"
+                className={styles.channel}
+                aria-label={`${c.label}: ${c.val}`}
+              >
                 <span className={styles.channelIconWrap}>{c.icon}</span>
                 <div className={styles.channelBody}>
                   <p className={styles.channelLabel}>{c.label}</p>
@@ -52,7 +59,7 @@ export function Contact() {
           {/* Form */}
           <form className={styles.form} onSubmit={handleSubmit}>
             {sent ? (
-              <div className={styles.sent}>
+              <div className={styles.sent} role="status" aria-live="polite">
                 <span className={styles.sentIcon}>✓</span>
                 <p className={styles.sentTitle}>Message ready!</p>
                 <p className={styles.sentSub}>Your mail client will open with the message pre-filled.</p>
