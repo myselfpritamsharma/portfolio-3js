@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { profile } from '../data/profile';
 import styles from './About.module.css';
 
@@ -9,7 +10,33 @@ const LINES = [
   { key: 'FOCUS',    val: 'AI Agents · Multi-LLM Systems · Enterprise Full Stack' },
 ];
 
+const BADGE_KEY = 'orbit_docking_badge_unlocked';
+const BEST_SCORE_KEY = 'orbit_docking_best_score';
+const BADGE_EVENT = 'space-achievement-updated';
+
 export function About() {
+  const [badgeUnlocked, setBadgeUnlocked] = useState(false);
+  const [bestRunScore, setBestRunScore] = useState(0);
+
+  useEffect(() => {
+    const syncAchievement = () => {
+      const unlocked = localStorage.getItem(BADGE_KEY) === '1';
+      const scoreRaw = localStorage.getItem(BEST_SCORE_KEY);
+      const scoreNum = scoreRaw ? Number.parseInt(scoreRaw, 10) : 0;
+      setBadgeUnlocked(unlocked);
+      setBestRunScore(Number.isFinite(scoreNum) ? scoreNum : 0);
+    };
+
+    syncAchievement();
+    window.addEventListener(BADGE_EVENT, syncAchievement as EventListener);
+    window.addEventListener('storage', syncAchievement);
+
+    return () => {
+      window.removeEventListener(BADGE_EVENT, syncAchievement as EventListener);
+      window.removeEventListener('storage', syncAchievement);
+    };
+  }, []);
+
   return (
     <section className="section" id="about">
       <p className="section-tag">01 — Identity</p>
@@ -66,6 +93,13 @@ export function About() {
               </div>
             ))}
           </div>
+
+          {badgeUnlocked && (
+            <div className={styles.badgeBox}>
+              <p className={styles.badgeTitle}>Unlocked Badge</p>
+              <p className={styles.badgeText}>Orbital Survivor · Docking Run best score {bestRunScore}</p>
+            </div>
+          )}
 
           {/* Certifications */}
           <div className={styles.certsBox}>

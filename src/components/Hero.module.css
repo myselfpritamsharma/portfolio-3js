@@ -111,6 +111,35 @@
   backdrop-filter: blur(2px);
 }
 
+.achievement {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  border: 1px solid rgba(247, 204, 153, 0.48);
+  background: linear-gradient(160deg, rgba(247, 204, 153, 0.16), rgba(168, 215, 255, 0.14));
+  border-radius: 10px;
+  padding: 0.62rem 0.85rem;
+  margin-bottom: 1.45rem;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+}
+
+.achievementIcon {
+  font-size: 1.25rem;
+}
+
+.achievementTitle {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #fff0d8;
+}
+
+.achievementMeta {
+  color: var(--muted, #d6e1ee);
+  font-size: 0.82rem;
+}
+
 /* Stats */
 .stats {
   display: flex;

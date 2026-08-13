@@ -20,7 +20,7 @@ export function Contact() {
 
   return (
     <section className="section" id="contact">
-      <p className="section-tag">05 — Signal</p>
+      <p className="section-tag">06 — Signal</p>
       <h2 className="section-title">Get In Touch</h2>
       <div className="section-rule" />
 

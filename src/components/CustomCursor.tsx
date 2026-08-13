@@ -89,6 +89,7 @@ export function CustomCursor() {
       about: { xRatio: 0.2, yRatio: 0.36, side: 'left' },
       skills: { xRatio: 0.86, yRatio: 0.2, side: 'right' },
       experience: { xRatio: 0.24, yRatio: 0.28, side: 'left' },
+      game: { xRatio: 0.82, yRatio: 0.24, side: 'right' },
       projects: { xRatio: 0.84, yRatio: 0.22, side: 'right' },
       contact: { xRatio: 0.24, yRatio: 0.34, side: 'left' },
     };

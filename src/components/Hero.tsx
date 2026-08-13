@@ -3,11 +3,16 @@ import { profile } from '../data/profile';
 import styles from './Hero.module.css';
 
 const ROLES = profile.roles;
+const BADGE_KEY = 'orbit_docking_badge_unlocked';
+const BEST_SCORE_KEY = 'orbit_docking_best_score';
+const BADGE_EVENT = 'space-achievement-updated';
 
 export function Hero({ onResumeClick }: { onResumeClick: () => void }) {
   const [roleIdx, setRoleIdx] = useState(0);
   const [displayed, setDisplayed] = useState('');
   const [deleting, setDeleting] = useState(false);
+  const [badgeUnlocked, setBadgeUnlocked] = useState(false);
+  const [bestRunScore, setBestRunScore] = useState(0);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   /* Typewriter effect */
@@ -27,6 +32,25 @@ export function Hero({ onResumeClick }: { onResumeClick: () => void }) {
 
     return () => clearTimeout(timeoutRef.current);
   }, [displayed, deleting, roleIdx]);
+
+  useEffect(() => {
+    const syncAchievement = () => {
+      const unlocked = localStorage.getItem(BADGE_KEY) === '1';
+      const scoreRaw = localStorage.getItem(BEST_SCORE_KEY);
+      const scoreNum = scoreRaw ? Number.parseInt(scoreRaw, 10) : 0;
+      setBadgeUnlocked(unlocked);
+      setBestRunScore(Number.isFinite(scoreNum) ? scoreNum : 0);
+    };
+
+    syncAchievement();
+    window.addEventListener(BADGE_EVENT, syncAchievement as EventListener);
+    window.addEventListener('storage', syncAchievement);
+
+    return () => {
+      window.removeEventListener(BADGE_EVENT, syncAchievement as EventListener);
+      window.removeEventListener('storage', syncAchievement);
+    };
+  }, []);
 
   const scrollTo = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 
@@ -55,6 +79,16 @@ export function Hero({ onResumeClick }: { onResumeClick: () => void }) {
         </div>
 
         <p className={styles.summary}>{profile.summary}</p>
+
+        {badgeUnlocked && (
+          <div className={styles.achievement}>
+            <span className={styles.achievementIcon}>🏅</span>
+            <div>
+              <p className={styles.achievementTitle}>Orbital Survivor Unlocked</p>
+              <p className={styles.achievementMeta}>Docking Run best score: {bestRunScore}</p>
+            </div>
+          </div>
+        )}
 
         <div className={styles.stats}>
           {profile.stats.map(s => (
