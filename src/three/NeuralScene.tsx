@@ -317,14 +317,14 @@ export function NeuralScene({ onSectionClick }: Props) {
     window.addEventListener('click', onClick);
     window.addEventListener('scroll', onScrollEvent, { passive: true });
 
-    /* ── Clock ────────────────────────────────────────── */
-    const clock = new THREE.Clock();
+    /* ── Animation timer ───────────────────────────────── */
+    const startTime = performance.now();
     let raf: number;
     const projVec = new THREE.Vector3();
 
     const animate = () => {
       raf = requestAnimationFrame(animate);
-      const t = clock.getElapsedTime();
+      const t = (performance.now() - startTime) / 1000;
 
       /* Rotate stars */
       stars.rotation.y = t * 0.004;

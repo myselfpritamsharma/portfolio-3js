@@ -55,6 +55,7 @@ const BADGE_KEY = 'orbit_docking_badge_unlocked';
 const BADGE_EVENT = 'space-achievement-updated';
 const BADGE_THRESHOLD = 180;
 const GAME_HEIGHT = 360;
+const GAME_INSTRUCTIONS_ID = 'docking-run-instructions';
 
 export function SpaceGame() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -76,6 +77,7 @@ export function SpaceGame() {
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [badgeUnlocked, setBadgeUnlocked] = useState(false);
   const [status, setStatus] = useState<'idle' | 'running' | 'crashed'>('idle');
+  const [srMessage, setSrMessage] = useState('Docking Run ready. Press Start Mission.');
 
   const config = useMemo(() => DIFFICULTY[difficulty], [difficulty]);
 
@@ -237,6 +239,7 @@ export function SpaceGame() {
       setRuns(nextRuns);
       localStorage.setItem(RUNS_KEY, JSON.stringify(nextRuns));
       playTone(160, 0.18, 'sawtooth', 0.04);
+      setSrMessage(`Hull breach. Final score ${rounded}.`);
     }
 
     if (!badgeUnlocked && nextBest >= BADGE_THRESHOLD) {
@@ -245,6 +248,7 @@ export function SpaceGame() {
       window.dispatchEvent(new CustomEvent(BADGE_EVENT, { detail: { unlocked: true, bestScore: nextBest } }));
       playTone(620, 0.14, 'triangle', 0.05);
       setTimeout(() => playTone(860, 0.16, 'triangle', 0.05), 120);
+      setSrMessage(`Achievement unlocked. Orbital Survivor. Best score ${nextBest}.`);
     }
   }, [badgeUnlocked, bestScore, difficulty, playTone, runs]);
 
@@ -324,13 +328,14 @@ export function SpaceGame() {
     setStatus('running');
     setRunning(true);
     runningRef.current = true;
+    setSrMessage(`Mission started. Difficulty ${config.label}.`);
 
     playTone(420, 0.09, 'triangle', 0.04);
     setTimeout(() => playTone(560, 0.11, 'triangle', 0.04), 80);
 
     if (rafRef.current) cancelAnimationFrame(rafRef.current);
     rafRef.current = requestAnimationFrame(gameLoop);
-  }, [gameLoop, playTone, resizeCanvas]);
+  }, [config.label, gameLoop, playTone, resizeCanvas]);
 
   const updateVirtualKey = (side: 'left' | 'right', pressed: boolean) => {
     keysRef.current[side] = pressed;
@@ -416,6 +421,7 @@ export function SpaceGame() {
   const resetLeaderboard = () => {
     setRuns([]);
     localStorage.removeItem(RUNS_KEY);
+    setSrMessage('Local leaderboard reset.');
   };
 
   return (
@@ -424,10 +430,14 @@ export function SpaceGame() {
       <h2 className="section-title">Docking Run</h2>
       <div className="section-rule" />
 
-      <div className={styles.wrap}>
+      <div className={styles.wrap} role="region" aria-label="Docking Run game" aria-describedby={GAME_INSTRUCTIONS_ID}>
         <p className={styles.lead}>
           Pilot the ship through incoming debris. Survive as long as possible and beat your best run.
         </p>
+        <p className="sr-only" id={GAME_INSTRUCTIONS_ID}>
+          Controls: use A and D keys or left and right arrow keys to move the ship. On touch devices, use the left and right buttons.
+        </p>
+        <p className="sr-only" aria-live="polite" aria-atomic="true">{srMessage}</p>
 
         <div className={styles.metaRow}>
           <span className={styles.metaItem}>Score: {score}</span>
@@ -444,6 +454,7 @@ export function SpaceGame() {
                 type="button"
                 className={`${styles.diffBtn} ${difficulty === key ? styles.diffBtnActive : ''}`}
                 onClick={() => setDifficulty(key)}
+                aria-pressed={difficulty === key}
                 disabled={running}
               >
                 {DIFFICULTY[key].label}
@@ -461,7 +472,12 @@ export function SpaceGame() {
         </div>
 
         <div className={styles.canvasFrame}>
-          <canvas ref={canvasRef} className={styles.canvas} style={{ height: `${GAME_HEIGHT}px` }} />
+          <canvas
+            ref={canvasRef}
+            className={styles.canvas}
+            style={{ height: `${GAME_HEIGHT}px` }}
+            aria-hidden="true"
+          />
           {status === 'idle' && !running && (
             <div className={styles.overlay}>
               <p>Press Start Mission</p>

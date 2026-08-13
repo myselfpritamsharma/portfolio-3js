@@ -212,6 +212,8 @@
   bottom: 2.5rem;
   left: 50%;
   transform: translateX(-50%);
+  border: none;
+  background: transparent;
   display: flex;
   flex-direction: column;
   align-items: center;

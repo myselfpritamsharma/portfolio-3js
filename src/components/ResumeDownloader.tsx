@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useReactToPrint } from 'react-to-print';
 import styles from './ResumeDownloader.module.css';
 import { TemplateUS }      from '../cv/TemplateUS';
@@ -26,6 +26,7 @@ interface Props { onClose: () => void; }
 export function ResumeDownloader({ onClose }: Props) {
   const [selected, setSelected] = useState<FormatId | null>(null);
   const printRef = useRef<HTMLDivElement>(null);
+  const closeBtnRef = useRef<HTMLButtonElement>(null);
 
   const printFn = useReactToPrint({ contentRef: printRef });
 
@@ -33,16 +34,27 @@ export function ResumeDownloader({ onClose }: Props) {
 
   const fmt = FORMATS.find(f => f.id === selected);
 
+  useEffect(() => {
+    closeBtnRef.current?.focus();
+
+    const onEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+
+    window.addEventListener('keydown', onEsc);
+    return () => window.removeEventListener('keydown', onEsc);
+  }, [onClose]);
+
   return (
-    <div className={styles.overlay} onClick={e => { if (e.target === e.currentTarget) onClose(); }}>
-      <div className={styles.modal}>
+    <div className={styles.overlay} role="presentation" onClick={e => { if (e.target === e.currentTarget) onClose(); }}>
+      <div className={styles.modal} role="dialog" aria-modal="true" aria-labelledby="resume-dialog-title">
         {/* Header */}
         <div className={styles.header}>
           <div>
-            <h2 className={styles.title}>Download Resume</h2>
+            <h2 className={styles.title} id="resume-dialog-title">Download Resume</h2>
             <p className={styles.sub}>Choose a country/region CV format</p>
           </div>
-          <button className={styles.close} onClick={onClose} aria-label="Close">✕</button>
+          <button type="button" className={styles.close} onClick={onClose} aria-label="Close" ref={closeBtnRef}>✕</button>
         </div>
 
         {/* Format grid */}
@@ -50,8 +62,10 @@ export function ResumeDownloader({ onClose }: Props) {
           {FORMATS.map(f => (
             <button
               key={f.id}
+              type="button"
               className={`${styles.fmtCard} ${selected === f.id ? styles.fmtActive : ''}`}
               onClick={() => setSelected(f.id as FormatId)}
+              aria-pressed={selected === f.id}
               style={{ '--c': f.color } as React.CSSProperties}
             >
               <span className={styles.fmtFlag}>{f.flag}</span>
@@ -73,8 +87,9 @@ export function ResumeDownloader({ onClose }: Props) {
             </p>
           )}
           <div className={styles.actionBtns}>
-            <button className="btn btn-outline" onClick={onClose}>Cancel</button>
+            <button type="button" className="btn btn-outline" onClick={onClose}>Cancel</button>
             <button
+              type="button"
               className="btn btn-primary"
               disabled={!selected}
               onClick={handlePrint}

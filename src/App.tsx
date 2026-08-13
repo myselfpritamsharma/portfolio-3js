@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { NeuralScene }        from './three/NeuralScene';
 import { CustomCursor }       from './components/CustomCursor';
 import { Navbar }             from './components/Navbar';
@@ -17,12 +17,24 @@ function App() {
   const [showResume, setShowResume] = useState(false);
   const [showDeveloperBriefing, setShowDeveloperBriefing] = useState(false);
 
+  useEffect(() => {
+    const onEsc = (e: KeyboardEvent) => {
+      if (e.key !== 'Escape') return;
+      setShowResume(false);
+      setShowDeveloperBriefing(false);
+    };
+
+    window.addEventListener('keydown', onEsc);
+    return () => window.removeEventListener('keydown', onEsc);
+  }, []);
+
   const handleSectionClick = useCallback((id: string) => {
     if (id === 'developer') {
       setShowDeveloperBriefing(true);
       return;
     }
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    document.getElementById(id)?.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' });
   }, []);
 
   return (
@@ -35,11 +47,12 @@ function App() {
 
       {/* All page content */}
       <div className="app-shell">
+        <a href="#main-content" className="skip-link">Skip to main content</a>
         <Navbar
           onResumeClick={() => setShowResume(true)}
           onDeveloperClick={() => setShowDeveloperBriefing(true)}
         />
-        <main>
+        <main id="main-content" tabIndex={-1}>
           <Hero    onResumeClick={() => setShowResume(true)} />
           <About />
           <Skills />
@@ -72,10 +85,15 @@ function App() {
 
       {/* Hidden Developer Briefing modal */}
       {showDeveloperBriefing && (
-        <div className="developer-briefing-overlay" onClick={(e) => {
+        <div className="developer-briefing-overlay" role="presentation" onClick={(e) => {
           if (e.target === e.currentTarget) setShowDeveloperBriefing(false);
         }}>
-          <div className="developer-briefing-modal card">
+          <div
+            className="developer-briefing-modal card"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Developer briefing"
+          >
             <button
               type="button"
               className="developer-briefing-close"

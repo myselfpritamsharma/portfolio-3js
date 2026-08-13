@@ -52,7 +52,10 @@ export function Hero({ onResumeClick }: { onResumeClick: () => void }) {
     };
   }, []);
 
-  const scrollTo = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  const scrollTo = (id: string) => {
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    document.getElementById(id)?.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' });
+  };
 
   return (
     <section className={styles.hero} id="hero">
@@ -74,7 +77,8 @@ export function Hero({ onResumeClick }: { onResumeClick: () => void }) {
 
         <div className={styles.roleRow}>
           <span className={styles.rolePrefix}>Orbital Role:</span>
-          <span className={styles.roleText}>{displayed}</span>
+          <span className={styles.roleText} aria-hidden="true">{displayed}</span>
+          <span className="sr-only" aria-live="polite">Current role: {ROLES[roleIdx]}</span>
           <span className={styles.cursor} aria-hidden>|</span>
         </div>
 
@@ -109,13 +113,13 @@ export function Hero({ onResumeClick }: { onResumeClick: () => void }) {
         </div>
 
         <div className={styles.socials}>
-          <a href={profile.github}   target="_blank" rel="noreferrer" title="GitHub">
+          <a href={profile.github} target="_blank" rel="noreferrer" title="GitHub" aria-label="Open GitHub profile in a new tab">
             <GithubIcon />
           </a>
-          <a href={profile.linkedin} target="_blank" rel="noreferrer" title="LinkedIn">
+          <a href={profile.linkedin} target="_blank" rel="noreferrer" title="LinkedIn" aria-label="Open LinkedIn profile in a new tab">
             <LinkedinIcon />
           </a>
-          <a href={`mailto:${profile.email}`} title="Email">
+          <a href={`mailto:${profile.email}`} title="Email" aria-label="Send an email">
             <MailIcon />
           </a>
         </div>
@@ -126,10 +130,15 @@ export function Hero({ onResumeClick }: { onResumeClick: () => void }) {
       </div>
 
       {/* Scroll indicator */}
-      <div className={styles.scrollHint} onClick={() => scrollTo('about')}>
+      <button
+        type="button"
+        className={styles.scrollHint}
+        onClick={() => scrollTo('about')}
+        aria-label="Scroll down to the about section"
+      >
         <span className={styles.scrollLine} />
         <span className={styles.scrollText}>descend</span>
-      </div>
+      </button>
     </section>
   );
 }

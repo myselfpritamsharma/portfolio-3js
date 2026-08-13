@@ -26,16 +26,23 @@ export function Navbar({ onResumeClick, onDeveloperClick }: Props) {
   }, []);
 
   const navigateToSection = (id: string) => {
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     window.dispatchEvent(new CustomEvent('rocket-nav-jump', { detail: { targetId: id } }));
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    document.getElementById(id)?.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' });
     setOpen(false);
   };
 
   return (
-    <nav className={`${styles.nav} ${scrolled ? styles.scrolled : ''}`}>
+    <nav className={`${styles.nav} ${scrolled ? styles.scrolled : ''}`} aria-label="Primary">
       <div className={styles.inner}>
         {/* Logo */}
-        <button className={styles.logo} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+        <button
+          className={styles.logo}
+          onClick={() => {
+            const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' });
+          }}
+        >
           <span className={styles.logoPs}>PS</span>
           <span className={styles.logoDot}>.</span>
         </button>
@@ -60,6 +67,8 @@ export function Navbar({ onResumeClick, onDeveloperClick }: Props) {
             className={`${styles.burger} ${open ? styles.burgerOpen : ''}`}
             onClick={() => setOpen(o => !o)}
             aria-label="Mission Menu"
+            aria-expanded={open}
+            aria-controls="mobile-nav-drawer"
             title="Mission Menu"
           >
             <span /><span /><span />
@@ -69,7 +78,7 @@ export function Navbar({ onResumeClick, onDeveloperClick }: Props) {
 
       {/* Mobile drawer */}
       {open && (
-        <div className={styles.drawer}>
+        <div className={styles.drawer} id="mobile-nav-drawer">
           {NAV_LINKS.map(l => (
             <button key={l.id} className={styles.drawerLink} onClick={() => navigateToSection(l.id)}>
               {l.label}
