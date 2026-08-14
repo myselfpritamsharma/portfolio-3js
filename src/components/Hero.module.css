@@ -33,6 +33,51 @@
   animation: fadeUp .9s ease both;
 }
 
+/* Status pill */
+.statusOpen,
+.statusClosed {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: .72rem;
+  font-family: 'Share Tech Mono', monospace;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 999px;
+  margin-bottom: 1rem;
+  border: 1px solid;
+  opacity: .9;
+}
+.statusOpen {
+  color: #00ff88;
+  border-color: rgba(0,255,136,.35);
+  background: rgba(0,255,136,.08);
+}
+.statusClosed {
+  color: #aaa;
+  border-color: rgba(170,170,170,.25);
+  background: rgba(170,170,170,.06);
+}
+.statusDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}
+.statusOpen .statusDot {
+  box-shadow: 0 0 6px #00ff88;
+  animation: pulse 1.8s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .35; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .statusOpen .statusDot { animation: none; }
+}
+
 /* Greeting */
 .greeting {
   font-family: var(--font-mono, monospace);

@@ -69,6 +69,14 @@ export function Hero() {
           <span className={styles.greetingBracket}>{' />'}</span>
         </p>
 
+        <span
+          className={profile.openToWork ? styles.statusOpen : styles.statusClosed}
+          aria-label={profile.openToWork ? 'Open to new opportunities' : 'Not currently open to work'}
+        >
+          <span className={styles.statusDot} aria-hidden="true" />
+          {profile.openToWork ? 'Open to Opportunities' : 'Not Open to Work'}
+        </span>
+
         <h1 className={styles.name}>
           <span className={styles.nameFirst}>{profile.firstName}</span>
           <br />

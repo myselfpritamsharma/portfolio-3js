@@ -11,6 +11,7 @@ export const profile = {
     "Multi-LLM Orchestration Engineer",
     "Angular + React + .NET + Node.js",
   ],
+  openToWork: false,
   location: "Greater Kolkata Area, India",
   email: "myself.pritam.sharma@gmail.com",
   phone: "+91 XXXXX XXXXX",
