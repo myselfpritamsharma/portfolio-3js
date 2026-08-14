@@ -36,7 +36,8 @@ export function Contact() {
             {[
               { icon: '📧', label: 'Email',    val: profile.email,    href: `mailto:${profile.email}` },
               { icon: '💼', label: 'LinkedIn', val: 'pritam-sharma-483242199',  href: profile.linkedin },
-              { icon: '🐙', label: 'GitHub',   val: 'myselfpritamsharma',  href: profile.github },
+              { icon: '🐙', label: 'GitHub (main)',   val: 'myselfpritamsharma',  href: profile.github },
+              { icon: '🐙', label: 'GitHub (archive)', val: 'pritamleo841', href: profile.githubAlt },
             ].map(c => (
               <a
                 key={c.label}

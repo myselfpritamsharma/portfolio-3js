@@ -16,6 +16,7 @@ export const profile = {
   phone: "+91 XXXXX XXXXX",
   linkedin: "https://www.linkedin.com/in/pritam-sharma-483242199",
   github: "https://github.com/pritamsharma",
+  githubAlt: "https://github.com/pritamleo841",
   website: "pritamsharma.dev",
 
   summary:

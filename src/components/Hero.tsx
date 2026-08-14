@@ -122,6 +122,9 @@ export function Hero() {
           <a href={`mailto:${profile.email}`} title="Email" aria-label="Send an email">
             <MailIcon />
           </a>
+          <a href={profile.githubAlt} target="_blank" rel="noreferrer" title="GitHub (archive)" aria-label="Open archive GitHub profile in a new tab">
+            <GithubIcon />
+          </a>
         </div>
 
         <p className={styles.secretHint}>
