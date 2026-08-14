@@ -7,7 +7,7 @@ const BADGE_KEY = 'orbit_docking_badge_unlocked';
 const BEST_SCORE_KEY = 'orbit_docking_best_score';
 const BADGE_EVENT = 'space-achievement-updated';
 
-export function Hero({ onResumeClick }: { onResumeClick: () => void }) {
+export function Hero() {
   const [roleIdx, setRoleIdx] = useState(0);
   const [displayed, setDisplayed] = useState('');
   const [deleting, setDeleting] = useState(false);
@@ -107,8 +107,8 @@ export function Hero({ onResumeClick }: { onResumeClick: () => void }) {
           <button className="btn btn-primary" onClick={() => scrollTo('projects')}>
             View Work →
           </button>
-          <button className="btn btn-outline" onClick={onResumeClick}>
-            ↓ Download CV
+          <button className="btn btn-outline" onClick={() => scrollTo('contact')}>
+            Get In Touch →
           </button>
         </div>
 

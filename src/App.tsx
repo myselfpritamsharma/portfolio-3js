@@ -87,7 +87,7 @@ function App() {
           onDeveloperClick={() => setShowDeveloperBriefing(true)}
         />
         <main id="main-content" tabIndex={-1}>
-          <Hero    onResumeClick={() => setShowResume(true)} />
+          <Hero />
           <About />
           <Skills />
           <Experience />
