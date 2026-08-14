@@ -170,6 +170,18 @@ export const profile = {
     },
     {
       id: 3,
+      name: "Neural Portfolio",
+      tagline: "This portfolio — Interstellar-themed 3D experience",
+      description:
+        "Interactive 3D neural network portfolio with particle physics, Interstellar-themed cosmos, rocket cursor, and multi-format resume generator supporting 7 country CV styles.",
+      tech: ["Three.js", "React", "TypeScript", "Vite"],
+      github: "https://github.com/myselfpritamsharma/portfolio-3js",
+      live: "#",
+      featured: true,
+      color: "#00d4ff",
+    },
+    {
+      id: 4,
       name: "Exam Analyzer Pro",
       tagline: "AI-powered exam prep with multi-LLM support",
       description:
@@ -181,7 +193,7 @@ export const profile = {
       color: "#f7cc99",
     },
     {
-      id: 4,
+      id: 5,
       name: "Enterprise SPA Suite",
       tagline: "Multi-platform responsive SPAs",
       description:
@@ -191,18 +203,6 @@ export const profile = {
       live: "#",
       featured: true,
       color: "#ff6b6b",
-    },
-    {
-      id: 5,
-      name: "Neural Portfolio",
-      tagline: "This portfolio — Interstellar-themed 3D experience",
-      description:
-        "Interactive 3D neural network portfolio with particle physics, Interstellar-themed cosmos, rocket cursor, and multi-format resume generator supporting 7 country CV styles.",
-      tech: ["Three.js", "React", "TypeScript", "Vite"],
-      github: "https://github.com/myselfpritamsharma/portfolio-3js",
-      live: "#",
-      featured: true,
-      color: "#00d4ff",
     },
     // ── More Projects (ranked by value) ───────────────────────────────────
     {
