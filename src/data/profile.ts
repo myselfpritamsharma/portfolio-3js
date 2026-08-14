@@ -143,22 +143,11 @@ export const profile = {
   ],
 
   projects: [
+    // ── Featured (ranked by value) ─────────────────────────────────────────
     {
       id: 1,
-      name: "Neural Portfolio",
-      tagline: "This portfolio — Interstellar-themed 3D experience",
-      description:
-        "Interactive 3D neural network portfolio with particle physics, Interstellar-themed cosmos, rocket cursor, and multi-format resume generator supporting 7 country CV styles.",
-      tech: ["Three.js", "React", "TypeScript", "Vite"],
-      github: "https://github.com/myselfpritamsharma/portfolio-3js",
-      live: "#",
-      featured: true,
-      color: "#00d4ff",
-    },
-    {
-      id: 2,
       name: "AI-Powered Hackathon Solution",
-      tagline: "Hyland Hackathon 2025 Winner",
+      tagline: "Hyland Hackathon 2025 Winner — Most Likely to be Adopted",
       description:
         "AI-powered internal tooling solution that won the 'Most Likely to be Adopted' category at the Hyland Hackathon 2025, automating a key workflow in the OnBase ecosystem.",
       tech: ["Angular", ".NET Core", "Azure", "AI/ML"],
@@ -168,43 +157,7 @@ export const profile = {
       color: "#bd34fe",
     },
     {
-      id: 3,
-      name: "Enterprise SPA Suite",
-      tagline: "Multi-platform responsive SPAs",
-      description:
-        "Suite of enterprise single-page applications with responsive UI designs for all screen sizes, resulting in significant market adoption growth over competitor products.",
-      tech: ["Angular", "Node.js", "MongoDB", "Azure Functions"],
-      github: "#",
-      live: "#",
-      featured: true,
-      color: "#ff6b6b",
-    },
-    {
-      id: 4,
-      name: "Hybrid Mobile Platform",
-      tagline: "Cross-platform iOS & Android apps",
-      description:
-        "Device-agnostic hybrid mobile applications published to both Google Play Store and Apple App Store using Angular and Cordova plugins.",
-      tech: ["Angular", "Apache Cordova", "TypeScript", "REST APIs"],
-      github: "#",
-      live: "#",
-      featured: false,
-      color: "#00ff88",
-    },
-    {
-      id: 5,
-      name: "Serverless API Platform",
-      tagline: "Azure Functions microservices backend",
-      description:
-        "Scalable serverless backend built on Azure Function Apps with JWT authentication, Azure AD integration, and minimal infrastructure overhead.",
-      tech: ["Node.js", "Azure Functions", "JWT", "Azure AD"],
-      github: "#",
-      live: "#",
-      featured: false,
-      color: "#ffd700",
-    },
-    {
-      id: 6,
+      id: 2,
       name: "Wordle Multiverse",
       tagline: "Cross-platform multilingual word game — EN / Bengali / Hindi",
       description:
@@ -216,7 +169,7 @@ export const profile = {
       color: "#a8d7ff",
     },
     {
-      id: 7,
+      id: 3,
       name: "Exam Analyzer Pro",
       tagline: "AI-powered exam prep with multi-LLM support",
       description:
@@ -228,7 +181,32 @@ export const profile = {
       color: "#f7cc99",
     },
     {
-      id: 8,
+      id: 4,
+      name: "Enterprise SPA Suite",
+      tagline: "Multi-platform responsive SPAs",
+      description:
+        "Suite of enterprise single-page applications with responsive UI designs for all screen sizes, resulting in significant market adoption growth over competitor products.",
+      tech: ["Angular", "Node.js", "MongoDB", "Azure Functions"],
+      github: "#",
+      live: "#",
+      featured: true,
+      color: "#ff6b6b",
+    },
+    {
+      id: 5,
+      name: "Neural Portfolio",
+      tagline: "This portfolio — Interstellar-themed 3D experience",
+      description:
+        "Interactive 3D neural network portfolio with particle physics, Interstellar-themed cosmos, rocket cursor, and multi-format resume generator supporting 7 country CV styles.",
+      tech: ["Three.js", "React", "TypeScript", "Vite"],
+      github: "https://github.com/myselfpritamsharma/portfolio-3js",
+      live: "#",
+      featured: true,
+      color: "#00d4ff",
+    },
+    // ── More Projects (ranked by value) ───────────────────────────────────
+    {
+      id: 6,
       name: "AI Summarizer Anywhere",
       tagline: "Browser extension — highlight any text, summarize with AI",
       description:
@@ -238,6 +216,30 @@ export const profile = {
       live: "#",
       featured: false,
       color: "#00ff88",
+    },
+    {
+      id: 7,
+      name: "Hybrid Mobile Platform",
+      tagline: "Cross-platform iOS & Android apps",
+      description:
+        "Device-agnostic hybrid mobile applications published to both Google Play Store and Apple App Store using Angular and Cordova plugins.",
+      tech: ["Angular", "Apache Cordova", "TypeScript", "REST APIs"],
+      github: "#",
+      live: "#",
+      featured: false,
+      color: "#ffd700",
+    },
+    {
+      id: 8,
+      name: "Serverless API Platform",
+      tagline: "Azure Functions microservices backend",
+      description:
+        "Scalable serverless backend built on Azure Function Apps with JWT authentication, Azure AD integration, and minimal infrastructure overhead.",
+      tech: ["Node.js", "Azure Functions", "JWT", "Azure AD"],
+      github: "#",
+      live: "#",
+      featured: false,
+      color: "#00d4ff",
     },
     {
       id: 9,
