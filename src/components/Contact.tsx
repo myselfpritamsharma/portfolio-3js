@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './Contact.module.css';
 import { profile } from '../data/profile';
 
@@ -11,12 +11,20 @@ export function Contact() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Opens default mail client — no backend needed
     const subject = encodeURIComponent(`Portfolio Contact from ${form.name}`);
-    const body    = encodeURIComponent(`Name: ${form.name}\nEmail: ${form.email}\n\nMessage:\n${form.message}`);
-    window.location.href = `mailto:${profile.email}?subject=${subject}&body=${body}`;
+    const body = encodeURIComponent(`Name: ${form.name}\nEmail: ${form.email}\n\nMessage:\n${form.message}`);
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(profile.email)}&su=${subject}&body=${body}`;
+
+    window.open(gmailUrl, '_blank', 'noopener,noreferrer');
     setSent(true);
   };
+
+  useEffect(() => {
+    if (!sent) return;
+
+    const timer = window.setTimeout(() => setSent(false), 2500);
+    return () => window.clearTimeout(timer);
+  }, [sent]);
 
   return (
     <section className="section" id="contact">
@@ -62,8 +70,8 @@ export function Contact() {
             {sent ? (
               <div className={styles.sent} role="status" aria-live="polite">
                 <span className={styles.sentIcon}>✓</span>
-                <p className={styles.sentTitle}>Message ready!</p>
-                <p className={styles.sentSub}>Your mail client will open with the message pre-filled.</p>
+                <p className={styles.sentTitle}>Gmail draft opened.</p>
+                <p className={styles.sentSub}>The form will return in a moment so you can send another message.</p>
               </div>
             ) : (
               <>
