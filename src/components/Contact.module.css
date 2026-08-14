@@ -137,7 +137,12 @@
 
 .input::placeholder { color: rgba(214, 225, 238, 0.35); }
 
-.textarea { resize: vertical; min-height: 120px; }
+.textarea {
+  resize: vertical;
+  min-height: 120px;
+  max-height: 220px;
+  overflow-y: auto;
+}
 
 /* ── Sent state ───────────────────────────────── */
 .sent {

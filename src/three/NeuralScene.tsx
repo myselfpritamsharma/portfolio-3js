@@ -21,6 +21,7 @@ interface HubDef {
   label?: string;
   radius?: number;
   emissiveIntensity?: number;
+  textureUrl?: string;
 }
 
 export function NeuralScene({ onSectionClick }: Props) {
@@ -158,7 +159,7 @@ export function NeuralScene({ onSectionClick }: Props) {
       { section: 'resume', pos: new THREE.Vector3(7.0, -4.9, 0), color: 0xf6d7ab, label: '◈ ARCHIVE' },
       { section: 'contact', pos: new THREE.Vector3(10.8, 3.9, 0), color: 0xcbe6ff, label: '◈ UPLINK' },
       // Hidden knowledge planet: near the accretion ring, no floating label.
-      { section: 'developer', pos: new THREE.Vector3(2.5, -1.5, 0.65), color: 0x9ac9ff, radius: 0.36, emissiveIntensity: 0.72 },
+      { section: 'developer', pos: new THREE.Vector3(2.5, -1.5, 0.65), color: 0x9ac9ff, radius: 0.36, emissiveIntensity: 0.72, textureUrl: `${import.meta.env.BASE_URL}llm-generated-picture.png` },
     ];
 
     /* ── Label container ──────────────────────────────── */
@@ -170,13 +171,21 @@ export function NeuralScene({ onSectionClick }: Props) {
     const nodes: NodeObj[] = [];
 
     const sphereGeo = (r: number) => new THREE.SphereGeometry(r, 14, 14);
+    const textureLoader = new THREE.TextureLoader();
 
     /* Hub nodes */
     HUB_DEFS.forEach((def) => {
+      const map = def.textureUrl ? textureLoader.load(def.textureUrl) : undefined;
+      if (map) {
+        map.colorSpace = THREE.SRGBColorSpace;
+        map.anisotropy = renderer.capabilities.getMaxAnisotropy();
+      }
+
       const mat = new THREE.MeshStandardMaterial({
-        color: def.color,
-        emissive: def.color,
-        emissiveIntensity: def.emissiveIntensity ?? 1.2,
+        color: map ? 0xffffff : def.color,
+        emissive: map ? 0x0f1728 : def.color,
+        emissiveIntensity: map ? 0.18 : (def.emissiveIntensity ?? 1.2),
+        map,
         transparent: true, opacity: 0.95,
       });
       const mesh = new THREE.Mesh(sphereGeo(def.radius ?? 0.45), mat);

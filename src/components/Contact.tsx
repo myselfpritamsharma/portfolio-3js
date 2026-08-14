@@ -6,6 +6,11 @@ export function Contact() {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
   const [sent, setSent] = useState(false);
 
+  const resetForm = () => {
+    setForm({ name: '', email: '', message: '' });
+    setSent(false);
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
     setForm(f => ({ ...f, [e.target.name]: e.target.value }));
 
@@ -72,6 +77,9 @@ export function Contact() {
                 <span className={styles.sentIcon}>✓</span>
                 <p className={styles.sentTitle}>Gmail draft opened.</p>
                 <p className={styles.sentSub}>The form will return in a moment so you can send another message.</p>
+                <button type="button" className="btn btn-outline" onClick={resetForm}>
+                  Send Another →
+                </button>
               </div>
             ) : (
               <>
