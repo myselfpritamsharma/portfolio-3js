@@ -192,18 +192,6 @@ export const profile = {
       featured: true,
       color: "#f7cc99",
     },
-    {
-      id: 5,
-      name: "Enterprise SPA Suite",
-      tagline: "Multi-platform responsive SPAs",
-      description:
-        "Suite of enterprise single-page applications with responsive UI designs for all screen sizes, resulting in significant market adoption growth over competitor products.",
-      tech: ["Angular", "Node.js", "MongoDB", "Azure Functions"],
-      github: "#",
-      live: "#",
-      featured: true,
-      color: "#ff6b6b",
-    },
     // ── More Projects (ranked by value) ───────────────────────────────────
     {
       id: 6,
