@@ -123,9 +123,14 @@ export function Contact() {
                     required
                   />
                 </div>
-                <button type="submit" className="btn btn-primary" style={{ width: '100%', justifyContent: 'center' }}>
-                  Send Message →
-                </button>
+                <div className={styles.formButtons}>
+                  <button type="submit" className="btn btn-primary">
+                    Send Message →
+                  </button>
+                  <button type="button" className="btn btn-outline" onClick={resetForm}>
+                    Reset
+                  </button>
+                </div>
               </>
             )}
           </form>

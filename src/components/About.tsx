@@ -70,10 +70,14 @@ export function About() {
 
         {/* Right column */}
         <div className={styles.right}>
-          {/* Avatar placeholder with glow */}
+          {/* Avatar with profile image */}
           <div className={styles.avatar}>
             <div className={styles.avatarInner}>
-              <span className={styles.avatarInitials}>PS</span>
+              <img 
+                src={`${import.meta.env.BASE_URL}llm-generated-picture.png`}
+                alt="Pritam Sarkar"
+                className={styles.avatarImage}
+              />
             </div>
             <div className={styles.avatarRing} />
             <div className={styles.avatarRing2} />

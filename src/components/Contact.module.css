@@ -144,6 +144,16 @@
   overflow-y: auto;
 }
 
+.formButtons {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.formButtons .btn {
+  flex: 1;
+  justify-content: center;
+}
+
 /* ── Sent state ───────────────────────────────── */
 .sent {
   display: flex;
